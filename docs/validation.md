@@ -220,31 +220,46 @@ unbalanced Gaussian-bump run completed with finite model parameters,
 trajectories and log masses, and predictions agreed exactly after reload.
 This is a functional training check, not a convergence or accuracy claim.
 
-## Compact Gaussian synchronization comparison
+## Fresh Gaussian map and synchronized transport
 
-The [Gaussian tutorial](tutorials/01_gaussian.ipynb) uses the shared packaged
-example configuration at `src/coati/_gaussian_example.json`. The current secondary
-weight is Cy=0.9. Terminal centers are (0.56, 0.74) and (0.74, 0.56),
-with the same midpoint and a smaller separation, with the original compact covariances and Gaussian bump.
-Numeric parameter blocks and the earlier parameter discussion have been removed
-from the notebook. The Python script uses the same configuration.
+The [Gaussian tutorial](tutorials/01_gaussian.ipynb) generates the original
+observations and map support directly in memory. AnnData stores the 3000 observed
+cells and a separate 10000-pair map-fitting pool. Fresh arrays were checked against
+the original generator outputs; the tutorial reads no archived data, JSON preset
+or pretrained T.
 
-Both final models start from a common primary-only warm-up checkpoint, with fresh
-optimizers and the same refinement budget. Only endpoint snapshots are supplied.
-The comparison shows all particles in both spaces, with the bump's three black
-contours and observed endpoint populations in grey. Plotted coordinates were
-checked against the complete prediction arrays. The training core is unchanged.
+T uses the original FourierBumpMLP architecture and weighted supervised objective:
+6000 AdamW steps, batch 768, learning rate 1e-3, z weight 12, and an 85/15 seeded
+split. State selection uses validation loss; the selected step is 4000.
 
-| Model | Endpoint Sinkhorn | Primary action | Secondary action | Terminal mass | Paths above half bump |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Without sync | 0.000099 | 0.126787 | 1.218385 | 1.000 | 56.25% |
-| With sync | 0.000485 | 0.149900 | 0.521974 | 1.000 | 17.38% |
+| Evaluation | Pairs | XY RMSE | z RMSE | z MAE |
+| --- | ---: | ---: | ---: | ---: |
+| Held-out observed | 434 | 0.000020 | 0.018564 | 0.005176 |
+| Held-out support | 1066 | 0.000031 | 0.005135 | 0.003115 |
+| Independent grid | 9216 | 0.000035 | 0.004531 | 0.002646 |
 
-All notebook cells executed from scratch. The 77 package checks, wheel inclusion
-and optional unbalanced CLI flow were verified at commit 67d8ae5; this update
-changes only the endpoint centers and refreshes the resulting outputs. This is a finite-sample numerical illustration, not a
-convergence or global-optimum result. Full settings and hashes are in
-`provenance/gaussian_sync_validation.json`.
+The independent-grid height correlation is 0.999440. The predicted height at
+(0.5, 0.5) is 1.009059, with target 1. Observed pairs have zero target height;
+support and grid targets follow the bump surface, so their errors are reported
+separately. The grid does not enter fitting or state selection.
+
+The two balanced fields use the supplied Args: 3000 steps per model, batch 256,
+hidden width 256, two hidden layers, LeakyReLU, learning rate 1e-3, dt 0.1,
+adaptive Sinkhorn penalties and Cy=0.35 for synchronization. Both start from the
+same fresh random initialization. There is no warm-up. The synchronized field
+uses the freshly fitted, frozen T; support points are not trajectory snapshots.
+
+| Model | Endpoint Sinkhorn | Primary kinetic energy | Secondary kinetic energy | Median maximum mapped height |
+| --- | ---: | ---: | ---: | ---: |
+| Without sync | 0.000762 | 0.157419 | 1.015785 | 0.381557 |
+| With sync | 0.000921 | 0.185172 | 0.260300 | 0.053917 |
+
+All 1000 initial particles are plotted without path selection or smoothing.
+Balanced target and predicted mass are one, despite the larger sampled terminal
+snapshot. All 13 notebook code cells completed, and 83 package/example checks
+passed locally. The training core is unchanged. Numeric results and data hashes
+are recorded in `provenance/gaussian_fresh_validation.json` in the COATI repository.
+Earlier analytic-map results remain in `provenance/gaussian_sync_validation.json`.
 
 ## Mouse gastrulation quickstart
 
