@@ -14,7 +14,7 @@ saved results and figures, with the same navigation and theme as the rest of the
 | [Held-out biological reconstruction](tutorials/06_heldout_biological.ipynb) | Optional W2 normalization, a held-out pancreas stage, 1,000 training iterations and shared UMAP reconstruction |
 | [Gastrulation dynamics and mass](tutorials/07_dynamics.ipynb) | Paired gastrulation data, a 1,000-step unbalanced model, E8.5 growth and flow with supplied cell types, and incoming/outgoing/reweighting decomposition for a chosen cell type and interval |
 | [Train and inspect a cross-modal map](tutorials/08_map_quality.ipynb) | Map-only gastrulation training, held-out pairs, shared ATAC UMAP and cell-type/stage consistency |
-| [scMultisim](tutorials/scMultisim/index.md) | Train T |
+| [scMultisim](tutorials/scMultisim/index.md) | Train T and balanced COATI |
 | [Lineage gene and peak dynamics](tutorials/09_lineage_features.ipynb) | Later-start NMP cohorts, terminal lineage screening, observed gene/peak decoders, quality checks and molecular curves |
 
 ```{toctree}
