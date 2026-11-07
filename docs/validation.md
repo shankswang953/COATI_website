@@ -222,41 +222,43 @@ This is a functional training check, not a convergence or accuracy claim.
 
 ## Fresh Gaussian map and synchronized transport
 
-The [Gaussian tutorial](tutorials/01_gaussian.ipynb) generates the original
-observations and map support directly in memory. AnnData stores the 3000 observed
-cells and a separate 10000-pair map-fitting pool. Fresh arrays were checked against
-the original generator outputs; the tutorial reads no archived data, JSON preset
-or pretrained T.
+The [Gaussian tutorial](tutorials/01_gaussian.ipynb) generates isotropic Gaussian
+observations and map support directly in memory. The initial covariance is
+0.004 I2 and both terminal covariances are 0.003 I2. AnnData stores the 3000
+observed cells and a separate 10000-pair map-fitting pool. The tutorial reads no
+archived data, JSON preset or pretrained T.
 
 T uses the original FourierBumpMLP architecture and weighted supervised objective:
 6000 AdamW steps, batch 768, learning rate 1e-3, z weight 12, and an 85/15 seeded
-split. State selection uses validation loss; the selected step is 4000.
+split. State selection uses validation loss; the selected step is 1500.
 
 | Evaluation | Pairs | XY RMSE | z RMSE | z MAE |
 | --- | ---: | ---: | ---: | ---: |
-| Held-out observed | 434 | 0.000020 | 0.018564 | 0.005176 |
-| Held-out support | 1066 | 0.000031 | 0.005135 | 0.003115 |
-| Independent grid | 9216 | 0.000035 | 0.004531 | 0.002646 |
+| Held-out observed | 434 | 0.000047 | 0.021079 | 0.004067 |
+| Held-out support | 1066 | 0.000065 | 0.005544 | 0.003500 |
+| Independent grid | 9216 | 0.000067 | 0.005036 | 0.002998 |
 
-The independent-grid height correlation is 0.999440. The predicted height at
-(0.5, 0.5) is 1.009059, with target 1. Observed pairs have zero target height;
+The independent-grid height correlation is 0.999378. The predicted height at
+(0.5, 0.5) is 0.999919, with target 1. Observed pairs have zero target height;
 support and grid targets follow the bump surface, so their errors are reported
 separately. The grid does not enter fitting or state selection.
 
-The two balanced fields use the supplied Args: 3000 steps per model, batch 256,
-hidden width 256, two hidden layers, LeakyReLU, learning rate 1e-3, dt 0.1,
-adaptive Sinkhorn penalties and Cy=0.35 for synchronization. Both start from the
-same fresh random initialization. There is no warm-up. The synchronized field
-uses the freshly fitted, frozen T; support points are not trajectory snapshots.
+The two balanced fields use the concise public Config interface. The tutorial
+overrides only 3000 steps per model, batch 256, hidden width 256, adaptive Sinkhorn
+penalties and Cy=0.5; two hidden layers, LeakyReLU, learning rate 1e-3, dt 0.1 and
+the remaining loss settings use COATI defaults. Both start from the same fresh
+random initialization. There is no warm-up. The synchronized field uses the
+freshly fitted, frozen T; support points are not trajectory snapshots.
 
 | Model | Endpoint Sinkhorn | Primary kinetic energy | Secondary kinetic energy | Median maximum mapped height |
 | --- | ---: | ---: | ---: | ---: |
-| Without sync | 0.000762 | 0.157419 | 1.015785 | 0.381557 |
-| With sync | 0.000921 | 0.185172 | 0.260300 | 0.053917 |
+| Without sync | 0.000206 | 0.161313 | 0.999115 | 0.380628 |
+| With sync | 0.001425 | 0.213448 | 0.266299 | 0.038393 |
 
 All 1000 initial particles are plotted without path selection or smoothing.
 Balanced target and predicted mass are one, despite the larger sampled terminal
-snapshot. All 13 notebook code cells completed, and 83 package/example checks
+snapshot. Analytic Gaussian-bump contours are exact concentric circles. All 13
+notebook code cells completed, and 84 package/example checks
 passed locally. The training core is unchanged. Numeric results and data hashes
 are recorded in `provenance/gaussian_fresh_validation.json` in the COATI repository.
 Earlier analytic-map results remain in `provenance/gaussian_sync_validation.json`.
