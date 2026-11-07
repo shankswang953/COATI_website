@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+.venv-manim/
+.DS_Store
+docs/_build/
+_package/
+.migration-backup/
+.sites-source/
+animations/media/
