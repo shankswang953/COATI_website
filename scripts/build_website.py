@@ -19,7 +19,11 @@ def main():
     root = Path(__file__).resolve().parents[1]
     package = (args.package_root or root.parent / "COATI").resolve()
     output = root / "docs" / "_build" / "html"
-    env = {**os.environ, "LC_ALL": "C", "LANG": "C"}
+    package_src = str(package / "src")
+    existing_pythonpath = os.environ.get("PYTHONPATH")
+    env = {**os.environ, "LC_ALL": "C", "LANG": "C",
+           "PYTHONPATH": package_src if not existing_pythonpath
+           else package_src + os.pathsep + existing_pythonpath}
     subprocess.run([sys.executable, "scripts/build_notebook_pages.py",
                     "--package-root", str(package)], cwd=root,
                    env=env, check=True)

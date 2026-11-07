@@ -4,4 +4,4 @@ orphan: true
 
 # Paired modalities
 
-The synthetic demonstrations are now combined in [Gaussian toy: sync vs no sync](01_gaussian.ipynb), which directly compares trained routes with and without secondary information. For biological AnnData, growth and UMAP flow, see [the gastrulation tutorial](07_dynamics.ipynb).
+The synthetic demonstrations are grouped under [Synthetic Gaussian bump](synthetic/index.md), which compares trained routes with and without secondary information in balanced and unbalanced settings. For biological AnnData, growth and UMAP flow, see [the gastrulation tutorial](07_dynamics.ipynb).
