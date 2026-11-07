@@ -20,12 +20,12 @@
    :members:
 ```
 
-## Toy datasets
+## Example data preparation
 
-```{eval-rst}
-.. automodule:: coati.datasets
-   :members:
-```
+Synthetic generators and Gaussian-specific helpers are maintained in the
+[repository examples](https://github.com/shankswang953/COATI/tree/main/examples).
+They are not imported or installed with `coati`. The package consumes prepared
+arrays, AnnData or files through `TemporalData` and the input adapters.
 
 ## Projected velocity
 

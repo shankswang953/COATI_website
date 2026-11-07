@@ -23,12 +23,12 @@ COATI learns vector fields from time-indexed snapshots, using one modality or pa
 ```python
 import coati as ct
 
-data = ct.datasets.paired()
-result = ct.train_vector_field(data, multimodal=True, balanced=True)
+data = ct.TemporalData.from_npz("primary.npz", keys=["t0", "t1"], times=[0., 1.])
+result = ct.train_vector_field(data, multimodal=False, balanced=True)
 result.plot_trajectory()
 ```
 
-Start with a small CPU example, inspect the trajectory, and then substitute your own prepared embeddings. Validation includes synthetic workflows and a short biological temporal-holdout tutorial; it does not establish biological superiority.
+For a self-contained CPU example, clone COATI and run [examples/run_toy.py](https://github.com/shankswang953/COATI/blob/main/examples/run_toy.py). Synthetic-data preparation is maintained in the repository examples, outside the installed package. The API above reads your prepared embeddings. Validation includes synthetic workflows and a short biological temporal-holdout tutorial; it does not establish biological superiority.
 
 ```{toctree}
 :maxdepth: 2

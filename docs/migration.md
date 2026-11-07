@@ -88,3 +88,21 @@ a packaging-only change. The original TraInf repositories are not modified.
 Existing checkpoints and their predictions do not change; new training uses the
 corrected objective. Previously executed unbalanced multimodal tutorial outputs
 remain historical results, not results of retraining with this correction.
+
+
+## Synthetic data preparation
+
+Toy generators, Gaussian comparison helpers, reference checkpoints and example
+settings have moved to `examples/` in the COATI source repository. They are not
+included in the installed Python package. Training and inference are unchanged.
+
+Use `python examples/run_toy.py ...` instead of `coati toy ...`. Repository
+notebooks import `examples/toy_data.py` as `datasets` after adding the examples
+directory to the import path. Replace `ct.datasets.paired(...)` with
+`datasets.paired(...)` in your own repository examples, or supply your prepared
+`TemporalData`/AnnData directly to the public training API.
+
+The original Gaussian-reference notebook loads the same archived NPZ files and
+weights from `examples/data/gaussian_reference/`; it does not regenerate data.
+The separate `examples/generate_gaussian_data.py` script reproduces the original
+primary, observed secondary and map-support arrays when explicitly requested.

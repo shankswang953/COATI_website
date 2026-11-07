@@ -44,7 +44,8 @@ run to repeat its quality checks without retraining.
 ```python
 import coati as ct
 
-data = ct.datasets.paired(n=128)
+data = ct.TemporalData.from_npz("primary.npz", secondary_path="secondary.npz",
+                                keys=["t0", "tmid", "t1"], times=[0., .5, 1.])
 result = ct.fit(data, ct.Config(sync_loss=True, sync_weight=.35))
 print(result.map_report)
 ```
@@ -71,7 +72,7 @@ Within each supplied stage, 20% of paired rows are reserved for validation, with
 ## Held-out stages and prediction times
 
 ```python
-observed = ct.datasets.paired(n=128)  # times 0, 0.5, 1
+observed = data  # prepared paired snapshots at times 0, 0.5, 1
 training = observed.without_times([0.5])
 result = ct.fit(training, ct.Config(sync_loss=True, sync_weight=.35))
 prediction = result.predict(times=[0., .5, 1.])
@@ -109,8 +110,8 @@ A PyTorch module can implement `forward(q, t)` or a time-independent `forward(q)
 ## Command line
 
 ```bash
-coati toy --dataset paired --output outputs/film
-coati toy --dataset paired --map-type mlp --map-epochs 300 --output outputs/mlp
+python examples/run_toy.py --dataset paired --output outputs/film
+python examples/run_toy.py --dataset paired --map-type mlp --map-epochs 300 --output outputs/mlp
 python examples/run_paired_loso.py --output outputs/paired-loso
 ```
 

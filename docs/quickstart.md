@@ -3,10 +3,15 @@
 ```python
 import coati as ct
 
-result = ct.train_vector_field(ct.datasets.gaussian(), iterations=200)
+data = ct.TemporalData.from_npz("primary.npz", keys=["t0", "t1"], times=[0., 1.])
+result = ct.train_vector_field(data, iterations=200)
 trajectory = result.predict_trajectory()
 result.plot_trajectory()
 ```
+
+Use your prepared NPZ snapshots in this example. For a runnable synthetic
+starter, clone COATI and run `python examples/run_toy.py --dataset gaussian --output outputs/gaussian`.
+Data generators are example scripts, not part of the installed package.
 
 ## Choose modalities and population dynamics
 
@@ -21,7 +26,9 @@ result.plot_trajectory()
 config = ct.Config(multimodal=True, balanced=False,
                    iterations=500, learning_rate=1e-3, batch_size=64,
                    secondary_weight=.35)
-result = ct.train_vector_field(ct.datasets.paired(), config)
+paired = ct.TemporalData.from_npz("primary.npz", secondary_path="secondary.npz",
+                                  keys=["t0", "t1"], times=[0., 1.])
+result = ct.train_vector_field(paired, config)
 ```
 
 An explicit multimodal choice uses secondary_weight=.35 unless overridden.
