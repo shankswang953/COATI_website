@@ -27,7 +27,7 @@ def main():
     subprocess.run([sys.executable, "scripts/build_notebook_pages.py",
                     "--package-root", str(package)], cwd=root,
                    env=env, check=True)
-    subprocess.run([sys.executable, "-m", "sphinx", "-W", "--keep-going", "-b", "html",
+    subprocess.run([sys.executable, "-m", "sphinx", "-E", "-W", "--keep-going", "-b", "html",
                     "docs", str(output)], cwd=root, env=env, check=True)
     (output / ".nojekyll").touch()
     print(f"Website built: {output}", flush=True)

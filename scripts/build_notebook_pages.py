@@ -1,6 +1,7 @@
 """Render tutorial copies from a COATI checkout without executing its notebooks."""
 import argparse
 from pathlib import Path
+import subprocess
 import nbformat
 
 
@@ -15,7 +16,15 @@ def main():
         parser.error(f"No notebooks directory in {package}")
     out = root / "docs/tutorials"
     out.mkdir(parents=True, exist_ok=True)
-    for source in sorted((package / "notebooks").rglob("*.ipynb")):
+    if (package / ".git").exists():
+        tracked = subprocess.run(
+            ["git", "ls-files", "-z", "--", "notebooks/*.ipynb", "notebooks/**/*.ipynb"],
+            cwd=package, check=True, capture_output=True,
+        ).stdout.decode().split("\0")
+        sources = [package / name for name in tracked if name]
+    else:
+        sources = list((package / "notebooks").rglob("*.ipynb"))
+    for source in sorted(sources):
         relative = source.relative_to(package / "notebooks")
         if any(part.startswith(".") or part in {"outputs", "_build"} for part in relative.parts):
             continue
