@@ -258,14 +258,13 @@ frozen T; support points are not trajectory snapshots.
 
 The balanced Cy sweep uses that same no-sync baseline and the same 3000-step
 budget and initialization for every synchronized run. It reports the fitted
-models directly; under this fixed budget, increasing Cy is not assumed to give
-a monotonic optimization result.
+models directly under the fixed optimization budget.
 
 | Cy | Endpoint Sinkhorn | Secondary kinetic energy | Median maximum mapped height |
 | ---: | ---: | ---: | ---: |
 | 0.1 | 0.000120 | 0.374621 | 0.093191 |
 | 0.5 | 0.001425 | 0.266299 | 0.038393 |
-| 0.9 | 0.012709 | 0.655671 | 0.253984 |
+| 0.7 | 0.000807 | 0.232102 | 0.029090 |
 
 All 1000 initial particles are plotted without path selection or smoothing.
 Balanced target and predicted mass are one, despite the larger sampled terminal
