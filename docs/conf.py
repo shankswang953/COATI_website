@@ -8,6 +8,7 @@ html_title = "COATI documentation"
 html_baseurl = "https://shankswang953.github.io/COATI_website/"
 html_logo = "_static/coati-logo.png"
 html_static_path = ["_static"]
+templates_path = ["_templates"]
 html_css_files = ["coati.css"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store",
                     "tutorials/02_paired.ipynb", "tutorials/05_velocity.ipynb"]

@@ -20,3 +20,5 @@ article img.brand {width:100%; max-width: 760px; background: white;}
 .cell_output table.dataframe tbody th {font-weight: 400; color: var(--color-foreground-muted);}
 .cell_output table.dataframe th:nth-child(2), .cell_output table.dataframe th:nth-child(3),
 .cell_output table.dataframe td:nth-child(2), .cell_output table.dataframe td:nth-child(3) {text-align: left;}
+
+.github-repository svg {stroke: none;}
