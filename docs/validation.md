@@ -256,13 +256,24 @@ frozen T; support points are not trajectory snapshots.
 | Without sync | 0.000206 | 0.161313 | 0.999115 | 0.380628 |
 | With sync | 0.001425 | 0.213448 | 0.266299 | 0.038393 |
 
+The balanced Cy sweep uses that same no-sync baseline and the same 3000-step
+budget and initialization for every synchronized run. It reports the fitted
+models directly; under this fixed budget, increasing Cy is not assumed to give
+a monotonic optimization result.
+
+| Cy | Endpoint Sinkhorn | Secondary kinetic energy | Median maximum mapped height |
+| ---: | ---: | ---: | ---: |
+| 0.1 | 0.000120 | 0.374621 | 0.093191 |
+| 0.5 | 0.001425 | 0.266299 | 0.038393 |
+| 0.9 | 0.012709 | 0.655671 | 0.253984 |
+
 All 1000 initial particles are plotted without path selection or smoothing.
 Balanced target and predicted mass are one, despite the larger sampled terminal
 snapshot. The unbalanced tutorial sets `biological_num=[1, 2]`, mass coefficient
 100 and global mass matching. At beta=1, its predicted terminal masses are 1.980399
 without sync and 1.981807 with sync. At beta=0.1, they are 1.940608 and 1.962171,
 respectively, against target 2. Analytic Gaussian-bump contours are
-exact concentric circles. All 15 notebook code cells completed, and 85 package/example
+exact concentric circles. All 21 notebook code cells completed, and 85 package/example
 checks passed locally. The training core is unchanged. Numeric results and data hashes
 are recorded in `provenance/syntheticdata_gaussian_validation.json` in the COATI repository.
 Earlier analytic-map results remain in `provenance/gaussian_sync_validation.json`.
