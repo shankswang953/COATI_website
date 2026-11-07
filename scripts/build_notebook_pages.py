@@ -15,7 +15,10 @@ def main():
         parser.error(f"No notebooks directory in {package}")
     out = root / "docs/tutorials"
     out.mkdir(parents=True, exist_ok=True)
-    for source in sorted((package / "notebooks").glob("*.ipynb")):
+    for source in sorted((package / "notebooks").rglob("*.ipynb")):
+        relative = source.relative_to(package / "notebooks")
+        if any(part.startswith(".") or part in {"outputs", "_build"} for part in relative.parts):
+            continue
         if source.stem in {"02_paired", "05_velocity"}:
             continue  # Their stable web URLs point to the consolidated comparison.
         notebook = nbformat.read(source, as_version=4)
@@ -48,8 +51,10 @@ def main():
                     "https://shankswang953.github.io/COATI_website/",
                 )
         # MyST-NB renders each notebook within the documentation theme.
-        nbformat.write(notebook, out / source.name)
-        print(source.name)
+        destination = out / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        nbformat.write(notebook, destination)
+        print(relative.as_posix())
 
 
 if __name__ == "__main__":
