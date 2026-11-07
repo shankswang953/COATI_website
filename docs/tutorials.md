@@ -7,7 +7,7 @@ saved results and figures, with the same navigation and theme as the rest of the
 | --- | --- |
 | [Introduction](tutorials/00_introduction.ipynb) | Prepare AnnData or arrays, align paired inputs, choose model modes and basic parameters |
 | [Original Gaussian experiment](tutorials/11_gaussian_reference.ipynb) | Original NPZ files, frozen learned T, checkpoint replay and direct training |
-| [Synthetic Gaussian bump](tutorials/synthetic/index.md) | Shared AnnData and frozen map, with balanced and unbalanced sync/no-sync experiments |
+| [Synthetic data](tutorials/syntheticdata/index.md) | Shared AnnData and frozen map, with balanced and unbalanced Gaussian-bump experiments |
 | [Splitting and growth](tutorials/03_split.ipynb) | Branching trajectories and changing population mass |
 | [Input adapters](tutorials/04_inputs.ipynb) | Arrays, dictionary, NPZ, CSV and AnnData inputs |
 | [Mouse gastrulation](tutorials/10_gastrulation.ipynb) | Paired data, COATI training and one UMAP flow view |
@@ -22,7 +22,7 @@ saved results and figures, with the same navigation and theme as the rest of the
 
 Introduction <tutorials/00_introduction>
 Original Gaussian experiment <tutorials/11_gaussian_reference>
-Synthetic Gaussian bump <tutorials/synthetic/index>
+Synthetic data <tutorials/syntheticdata/index>
 Splitting and growth <tutorials/03_split>
 Input adapters <tutorials/04_inputs>
 Mouse gastrulation <tutorials/10_gastrulation>

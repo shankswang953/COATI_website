@@ -1,4 +1,4 @@
-# Synthetic Gaussian bump
+# Synthetic data
 
 The two experiments reuse exactly the same committed AnnData and frozen cross-modal map.
 This keeps the geometry fixed while changing only whether population mass is conserved.
