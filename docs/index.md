@@ -11,7 +11,7 @@ COATI (Cross-Omics Aligned Trajectory Inference) reconstructs continuous develop
 
 Observed distributions in both modalities constrain the learned flow. Balanced COATI conserves particle mass; unbalanced COATI additionally learns population growth or depletion. The model keeps the modalities in their own feature spaces instead of merging them into one embedding.
 
-[Read the model formulation, training objective and parameter mapping →](model.md)
+[Read the Model formulation and Parameters](model.md)
 
 ```python
 import coati as ct
