@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # Migrating from TraInf
 
 COATI is an independent package. It does not import from, write to or require a local TraInf checkout. The original files were copied from the current working tree, including existing research changes, rather than assuming the committed public mirror represented the current algorithm.

@@ -295,23 +295,23 @@ The selected epoch is 295. Held-out paired RMSE across the five stages is 0.0023
 
 Both balanced vector fields use 10,000 iterations, width 256, two LeakyReLU layers,
 batch size 128, learning rate 1e-3, kinetic-energy coefficient 0.1 and primary matching
-coefficient 100. BranchSync uses Cy=0.9 and secondary manifold coefficient 10; the
+coefficient 10. BranchSync uses Cy=0.9 and secondary manifold coefficient 10; the
 primary-only control uses manifold coefficient 1. Both start from identical weights.
-Unlike the historical Figure 2b checkpoint, this tutorial deliberately caps the secondary
-matching coefficient at 10 (initial 10, minimum 1) so terminal marginal matching cannot
-dominate the synchronized geometry. Its weighted secondary PDF-to-energy gradient ratio
-at iteration 10,000 is 9.06; the earlier coefficient-100 tutorial run was 47.7.
+Unlike the historical Figure 2b checkpoint, this tutorial deliberately caps both adaptive
+matching coefficients at 10 (initial 10, minimum 1) so terminal marginal matching cannot
+dominate the synchronized geometry. At iteration 10,000, BranchSync's weighted primary
+and secondary PDF-to-primary-energy gradient ratios are 2.84 and 9.70, respectively.
 
 | Model | Primary terminal separation | Mapped terminal separation | Secondary endpoint Sinkhorn | Primary endpoint Sinkhorn |
 | --- | ---: | ---: | ---: | ---: |
-| Primary only | 0.090687 | 0.236606 | 0.001094 | 0.000168 |
-| BranchSync | 0.091837 | 0.257130 | 0.000326 | 0.000026 |
+| Primary only | 0.093899 | 0.267969 | 0.000615 | 0.000419 |
+| BranchSync | 0.083030 | 0.222116 | 0.001599 | 0.000342 |
 
 Separation is distributional: at the terminal time, the upper and lower halves are
 defined by the current y-coordinate median. No per-cell lineage identity is assumed.
-The historical unbalanced beta=0.1, 1 and 10 settings are documented in the notebook
-but are not retrained or presented as BranchSync results. Full settings and source hashes
-are recorded in `provenance/branch_sync_validation.json`.
+The comparison plot shows individual trajectories in one color without an average path.
+Full settings and source hashes are recorded in
+`provenance/branch_sync_validation.json`.
 
 ## Mouse gastrulation quickstart
 
