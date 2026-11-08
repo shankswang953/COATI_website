@@ -279,7 +279,7 @@ Earlier analytic-map results remain in `provenance/gaussian_sync_validation.json
 
 ## Mouse gastrulation quickstart
 
-The [Mouse gastrulation tutorial](tutorials/10_gastrulation.ipynb) contains the
+The [Mouse gastrulation tutorial](tutorials/gastrulation/mouseGastrulation.ipynb) contains the
 minimal data preparation, training and UMAP workflow. All nine cells were executed
 on 35,503 paired cells at four observed times, using RNA50 and ATAC14 in their
 supplied normalized representation. The cross-modal map passed its internal
