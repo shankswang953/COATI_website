@@ -1,24 +1,17 @@
 # COATI
 
 ```{raw} html
-<video controls playsinline preload="metadata" poster="_static/coati-intro-poster.png" style="width:100%;height:auto;border-radius:8px;background:#FAFBFD" aria-label="COATI animated introduction: from paired snapshots to coupled trajectories" aria-describedby="animation-caption">
+<video controls playsinline preload="metadata" poster="_static/coati-intro-poster.png" style="width:100%;height:auto;border-radius:8px;background:#FAFBFD" aria-label="COATI animated introduction: from paired snapshots to coupled trajectories">
   <source src="_static/coati-intro.mp4" type="video/mp4">
-  <p><a href="_static/coati-intro.mp4">Download the COATI introduction video</a>.</p>
+  <p>Your browser does not support embedded video.</p>
 </video>
-<p id="animation-caption">Two initial cell populations and five staggered terminal groups, with different covariance shapes. A 2D projection is mapped onto a 3D Gaussian-bump surface. Compare sync weights, inspect a fitted neural velocity field, and follow slow ODE integration. The final cell-distribution panels illustrate missing reference, manifold and mass constraints. Silent, with on-screen equations. The fitted field is a standalone geometric illustration, not a COATI training result.</p>
 ```
 
-[Download video](_static/coati-intro.mp4) · [Animation source and formula notes](https://github.com/shankswang953/COATI_website/tree/main/animations)
+COATI (Cross-Omics Aligned Trajectory Inference) reconstructs continuous developmental trajectories from time-indexed cell-state snapshots. A neural ODE evolves cells in a primary space such as RNA PCA, while a fixed cross-modal map projects the same trajectories into a secondary space such as ATAC LSI.
 
-COATI learns vector fields from time-indexed snapshots, using one modality or paired modalities, with balanced or unbalanced population dynamics. A Neural ODE evolves cells in the primary space, and a fixed cross-modal map carries that same trajectory into the second space. Both spaces constrain the learned flow; a weight controls the balance of energy and manifold penalties while marginal matching remains separately weighted.
+Observed distributions in both modalities constrain the learned flow. Balanced COATI conserves particle mass; unbalanced COATI additionally learns population growth or depletion. The model keeps the modalities in their own feature spaces instead of merging them into one embedding.
 
-```{raw} html
-<details>
-<summary>Paper overview (static)</summary>
-<a href="_static/coati-overview.pdf"><img src="_static/coati-overview.png" alt="COATI paper overview" style="width:100%;height:auto;background:white"></a>
-<p><a href="_static/coati-overview.pdf">View overview PDF</a></p>
-</details>
-```
+[Read the model formulation, training objective and parameter mapping →](model.md)
 
 ```python
 import coati as ct
@@ -45,6 +38,7 @@ tutorials
 :caption: Understand and extend
 
 configuration
+model
 velocity
 maps
 downstream
