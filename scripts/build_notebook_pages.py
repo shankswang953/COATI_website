@@ -40,6 +40,7 @@ def main():
                   "08_map_quality": "Train and inspect a cross-modal map",
                   "09_lineage_features": "Lineage gene and peak dynamics",
                   "mouseGastrulation": "Mouse gastrulation",
+                  "pretrainedModels": "Pretrained full-data models",
                   "11_gaussian_reference": "Original Gaussian experiment",
                   "balancedGaussianbump": "Balanced Gaussian bump",
                   "unbalancedGaussianbump": "Unbalanced Gaussian bump",
