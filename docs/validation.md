@@ -295,17 +295,18 @@ The selected epoch is 295. Held-out paired RMSE across the five stages is 0.0023
 
 Both balanced vector fields use 10,000 iterations, width 256, two LeakyReLU layers,
 batch size 128, learning rate 1e-3, kinetic-energy coefficient 0.1 and primary matching
-coefficient 100. BranchSync uses Cy=0.9 and secondary manifold coefficient 10; the
+coefficient 10. BranchSync uses Cy=0.9 and secondary manifold coefficient 100; the
 primary-only control uses manifold coefficient 1. Both start from identical weights.
-The primary adaptive matching coefficient starts and is capped at 100, while the
-BranchSync secondary coefficient starts and is capped at 10. At iteration 10,000,
+The primary adaptive matching coefficient starts and is capped at 10, while the
+BranchSync secondary coefficient starts and is capped at 100. At iteration 10,000,
 BranchSync's weighted primary and secondary PDF-to-primary-energy gradient ratios are
-24.43 and 6.91, respectively.
+4.70 and 130.83, respectively; its density-to-primary-energy gradient ratio is 378.22.
+The requested secondary constraints therefore dominate the final gradient diagnostic.
 
 | Model | Primary terminal separation | Mapped terminal separation | Secondary endpoint Sinkhorn | Primary endpoint Sinkhorn |
 | --- | ---: | ---: | ---: | ---: |
-| Primary only | 0.089341 | 0.242373 | 0.000413 | 0.000037 |
-| BranchSync | 0.097393 | 0.268039 | 0.000218 | 0.000025 |
+| Primary only | 0.093899 | 0.267969 | 0.000615 | 0.000419 |
+| BranchSync | 0.094217 | 0.269675 | 0.000302 | 0.000251 |
 
 Separation is distributional: at the terminal time, the upper and lower halves are
 defined by the current y-coordinate median. No per-cell lineage identity is assumed.
