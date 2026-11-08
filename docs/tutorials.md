@@ -7,7 +7,7 @@ saved results and figures, with the same navigation and theme as the rest of the
 | --- | --- |
 | [Introduction](tutorials/00_introduction.ipynb) | Prepare AnnData or arrays, align paired inputs, choose model modes and basic parameters |
 | [Original Gaussian experiment](tutorials/11_gaussian_reference.ipynb) | Original NPZ files, frozen learned T, checkpoint replay and direct training |
-| [Synthetic data](tutorials/syntheticdata/index.md) | Shared AnnData and frozen map, with balanced, unbalanced and balanced $C_y$-sweep Gaussian-bump experiments |
+| [Synthetic data](tutorials/syntheticdata/index.md) | Gaussian-bump comparisons and BranchSync on five paired branching snapshots |
 | [Splitting and growth](tutorials/03_split.ipynb) | Branching trajectories and changing population mass |
 | [Input adapters](tutorials/04_inputs.ipynb) | Arrays, dictionary, NPZ, CSV and AnnData inputs |
 | [Gastrulation](tutorials/gastrulation/index.md) | Train on paired data or load archived balanced and unbalanced 20k models into the original saved RNA UMAP |

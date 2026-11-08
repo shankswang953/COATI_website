@@ -277,6 +277,42 @@ checks passed locally. The training core is unchanged. Numeric results and data 
 are recorded in `provenance/syntheticdata_gaussian_validation.json` in the COATI repository.
 Earlier analytic-map results remain in `provenance/gaussian_sync_validation.json`.
 
+## BranchSync
+
+The [BranchSync tutorial](tutorials/syntheticdata/BranchSync.ipynb) regenerates the
+five paired ToySplit snapshots from the original seed-42 recipe. Each stage contains
+400 paired two-dimensional cells. The generated primary and secondary arrays match
+the Figure 2b source NPZ arrays exactly. Spatial x-coordinate bins cover [0, 1], while
+the balanced model retains the separate historical training-time grid 0, 1, 2, 3, 4.
+
+The notebook refits the original raw-coordinate FiLM map rather than loading the legacy
+checkpoint. It preserves width 64, three layers, time width 32, the 300-epoch budget,
+batch size 256, paired 80/20 per-stage split, AdamW settings and time-balanced raw MSE.
+No feature or time standardization is applied. Every fifth epoch is evaluated by the sum
+of the five validation Sinkhorn divergences, matching the historical checkpoint rule.
+The selected epoch is 295. Held-out paired RMSE across the five stages is 0.002397,
+0.016145, 0.017249, 0.023427 and 0.027798.
+
+Both balanced vector fields use 10,000 iterations, width 256, two LeakyReLU layers,
+batch size 128, learning rate 1e-3, kinetic-energy coefficient 0.1 and primary matching
+coefficient 100. BranchSync uses Cy=0.9 and secondary manifold coefficient 10; the
+primary-only control uses manifold coefficient 1. Both start from identical weights.
+Unlike the historical Figure 2b checkpoint, this tutorial deliberately caps the secondary
+matching coefficient at 10 (initial 10, minimum 1) so terminal marginal matching cannot
+dominate the synchronized geometry. Its weighted secondary PDF-to-energy gradient ratio
+at iteration 10,000 is 9.06; the earlier coefficient-100 tutorial run was 47.7.
+
+| Model | Primary terminal separation | Mapped terminal separation | Secondary endpoint Sinkhorn | Primary endpoint Sinkhorn |
+| --- | ---: | ---: | ---: | ---: |
+| Primary only | 0.090687 | 0.236606 | 0.001094 | 0.000168 |
+| BranchSync | 0.091837 | 0.257130 | 0.000326 | 0.000026 |
+
+Separation is distributional: at the terminal time, the upper and lower halves are
+defined by the current y-coordinate median. No per-cell lineage identity is assumed.
+The historical unbalanced beta=0.1, 1 and 10 settings are documented in the notebook
+but are not retrained or presented as BranchSync results. Full settings and source hashes
+are recorded in `provenance/branch_sync_validation.json`.
+
 ## Mouse gastrulation quickstart
 
 The [Mouse gastrulation tutorial](tutorials/gastrulation/mouseGastrulation.ipynb) contains the

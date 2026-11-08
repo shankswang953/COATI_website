@@ -1,7 +1,8 @@
 # Synthetic data
 
-The experiments reuse exactly the same committed AnnData and frozen cross-modal map.
-This keeps the geometry fixed while changing only whether population mass is conserved.
+The Gaussian experiments reuse exactly the same committed AnnData and frozen cross-modal
+map. BranchSync is a separate five-snapshot paired branching experiment generated directly
+from its original seed-42 recipe.
 
 - [Balanced Gaussian bump](balancedGaussianbump.ipynb): synchronized and primary-only
   vector fields with conserved mass.
@@ -10,6 +11,9 @@ This keeps the geometry fixed while changing only whether population mass is con
   every trajectory.
 - [Cy comparison](cyComparison.ipynb): one balanced no-sync baseline and synchronized
   runs at $C_y=0.1$, $0.5$ and $0.7$, all from the same model initialization.
+- [BranchSync](BranchSync.ipynb): weak branching in the primary space, an amplified split
+  in the secondary space, a freshly validated time-conditioned map and the balanced
+  10,000-step Figure 2b comparison.
 
 ```{toctree}
 :hidden:
@@ -17,4 +21,5 @@ This keeps the geometry fixed while changing only whether population mass is con
 Balanced Gaussian bump <balancedGaussianbump>
 Unbalanced Gaussian bump <unbalancedGaussianbump>
 Cy comparison <cyComparison>
+BranchSync <BranchSync>
 ```

@@ -44,7 +44,8 @@ def main():
                   "11_gaussian_reference": "Original Gaussian experiment",
                   "balancedGaussianbump": "Balanced Gaussian bump",
                   "unbalancedGaussianbump": "Unbalanced Gaussian bump",
-                  "cyComparison": "Cy comparison"}
+                  "cyComparison": "Cy comparison",
+                  "BranchSync": "BranchSync"}
         if notebook.cells and notebook.cells[0].cell_type == "markdown":
             first = notebook.cells[0].source.splitlines()
             first[0] = "# " + titles.get(source.stem, first[0].lstrip("# "))
