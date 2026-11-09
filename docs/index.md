@@ -21,7 +21,39 @@ result = ct.train_vector_field(data, multimodal=False, balanced=True)
 result.plot_trajectory()
 ```
 
-For a self-contained CPU example, clone COATI and run [examples/run_toy.py](https://github.com/shankswang953/COATI/blob/main/examples/run_toy.py). Synthetic-data preparation is maintained in the repository examples, outside the installed package. The API above reads your prepared embeddings. Validation includes synthetic workflows and a short biological temporal-holdout tutorial; it does not establish biological superiority.
+For a self-contained CPU example, clone COATI and run [examples/synthetic/run_toy.py](https://github.com/shankswang953/COATI/blob/main/examples/synthetic/run_toy.py). Synthetic-data preparation is maintained in the repository examples, outside the installed package. The API above reads your prepared embeddings. Validation includes synthetic workflows and a short biological temporal-holdout tutorial; it does not establish biological superiority.
+
+## Basic workflow
+
+COATI uses time-indexed primary embeddings, such as RNA PCA, and can optionally
+synchronize them with paired secondary embeddings, such as ATAC LSI. A typical
+analysis prepares the embeddings and time labels, trains or loads the cross-modal
+map, fits the vector field, and then performs trajectory inference and downstream
+analysis. Reusable downstream tools are available under `coati.downstream`.
+
+Install the package and run a short end-to-end example:
+
+```bash
+git clone https://github.com/shankswang953/COATI.git
+cd COATI
+python -m pip install -e '.[notebooks,visualization]'
+python -m examples.synthetic.run_toy \
+  --dataset gaussian \
+  --niters 200 \
+  --output outputs/gaussian-smoke
+```
+
+For a guided biological workflow:
+
+```bash
+python -m jupyter lab notebooks/00_introduction.ipynb
+```
+
+## References
+
+1. Wang, J., Zhao, Y., Nie, Q. and Cang, Z. [Synchronized Optimal Transport Reconstructs Coupled Transcriptomic and Chromatin Dynamics](https://arxiv.org/abs/2611.08853). arXiv:2611.08853, 2026.
+2. Cang, Z., Wang, J., Wei, X. and Zhao, Y. [Synchronization of Unbalanced Dynamical Optimal Transport across Multiple Spaces](https://arxiv.org/abs/2602.18725). arXiv:2602.18725, 2026.
+3. Cang, Z. and Zhao, Y. [Synchronized Optimal Transport for Joint Modeling of Dynamics Across Multiple Spaces](https://doi.org/10.1137/24M1667555). *SIAM Journal on Applied Mathematics* 85(1), 341–365, 2025.
 
 ```{toctree}
 :maxdepth: 2
