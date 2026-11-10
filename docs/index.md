@@ -21,7 +21,7 @@ result = ct.train_vector_field(data, multimodal=False, balanced=True)
 result.plot_trajectory()
 ```
 
-For a self-contained CPU example, clone COATI and run [examples/synthetic/run_toy.py](https://github.com/shankswang953/COATI/blob/main/examples/synthetic/run_toy.py). Synthetic-data preparation is maintained in the repository examples, outside the installed package. The API above reads your prepared embeddings. Validation includes synthetic workflows and a short biological temporal-holdout tutorial; it does not establish biological superiority.
+For a short biological example, clone COATI and run [examples/gastrulation/train_balanced.py](https://github.com/shankswang953/COATI/blob/main/examples/gastrulation/train_balanced.py). Dataset-specific preparation is maintained in the repository examples, outside the installed package. The API above reads your prepared embeddings. Validation includes synthetic workflows and biological temporal-holdout tutorials; it does not establish biological superiority.
 
 ## Basic workflow
 
@@ -37,10 +37,9 @@ Install the package and run a short end-to-end example:
 git clone https://github.com/shankswang953/COATI.git
 cd COATI
 python -m pip install -e '.[notebooks,visualization]'
-python -m examples.synthetic.run_toy \
-  --dataset gaussian \
-  --niters 200 \
-  --output outputs/gaussian-smoke
+python -m examples.gastrulation.train_balanced \
+  --iterations 200 \
+  --output outputs/gastrulation-balanced-smoke
 ```
 
 For a guided biological workflow:
