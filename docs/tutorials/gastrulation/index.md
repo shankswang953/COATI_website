@@ -10,6 +10,10 @@ RNA and ATAC data.
 - [Held-out distribution reconstruction](heldoutDistribution.ipynb): calculate the six
   RNA/ATAC LOSO distribution scores and compare observed E8.0/E8.5 cells with balanced
   and unbalanced predictions in one shared global RNA UMAP.
+- [NMP trajectories and Caudal-epiblast composition](nmpTrajectoryComposition.ipynb):
+  load current pretrained balanced and unbalanced models, inspect RNA and ATAC
+  trajectories in reproducible NMP UMAPs, and quantify the changing fate composition
+  of 417 observed E7.5 Caudal-epiblast cells.
 
 ```{toctree}
 :hidden:
@@ -17,4 +21,5 @@ RNA and ATAC data.
 Mouse gastrulation <mouseGastrulation>
 Pretrained full-data models <pretrainedModels>
 Held-out distribution reconstruction <heldoutDistribution>
+NMP trajectories and Caudal-epiblast composition <nmpTrajectoryComposition>
 ```

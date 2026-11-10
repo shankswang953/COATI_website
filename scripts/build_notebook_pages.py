@@ -42,6 +42,7 @@ def main():
                   "mouseGastrulation": "Mouse gastrulation",
                   "pretrainedModels": "Pretrained full-data models",
                   "heldoutDistribution": "Held-out distribution reconstruction",
+                  "nmpTrajectoryComposition": "NMP trajectories and Caudal-epiblast composition",
                   "11_gaussian_reference": "Original Gaussian experiment",
                   "balancedGaussianbump": "Balanced Gaussian bump",
                   "unbalancedGaussianbump": "Unbalanced Gaussian bump",
