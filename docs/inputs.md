@@ -118,13 +118,12 @@ Both embeddings share `adata.obs`, preserving cell identity. Omit `obsm_key` to 
 
 ## Optional scalar normalization
 
-The [biological reconstruction tutorial](tutorials/06_heldout_biological.ipynb)
-includes an explicit `normalize` switch. Leave it off for prepared `X_latent`
-inputs. Turn it on to estimate a W2-based scalar from the unscaled reduced
-features in `X_reduced_raw`, independently for RNA and ATAC.
+Leave scalar normalization off for already prepared latent inputs. When explicit
+normalization is needed, estimate a W2-based scalar from the unscaled reduced
+features independently for RNA and ATAC.
 
 The scales are fitted using retained training stages only and then applied to
 all observations and held-out references. They preserve relative feature scales;
-this is not per-feature standardization or raw-count preprocessing. The notebook
-saves the scales, the stages used to fit them and predictions converted back to
-the selected input units. Existing PCA/PoissonVI representations remain fixed.
+this is not per-feature standardization or raw-count preprocessing. Save the
+fitted scales and the training stages with the model. Existing reduced
+representations remain fixed.

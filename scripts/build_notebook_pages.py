@@ -28,13 +28,12 @@ def main():
         relative = source.relative_to(package / "notebooks")
         if any(part.startswith(".") or part in {"outputs", "_build"} for part in relative.parts):
             continue
-        if source.stem in {"02_paired", "03_split", "05_velocity", "11_gaussian_reference"}:
+        if source.stem in {"02_paired", "03_split", "05_velocity", "06_heldout_biological", "11_gaussian_reference"}:
             continue  # Their stable web URLs point to the consolidated comparison.
         notebook = nbformat.read(source, as_version=4)
         # Keep web titles short and retain all code and scientific outputs.
         titles = {"00_introduction": "Introduction", "01_gaussian": "Gaussian toy: sync vs no sync", "02_paired": "Paired modalities",
                   "05_velocity": "Vector fields and UMAP velocity",
-                  "06_heldout_biological": "Held-out biological reconstruction",
                   "09_lineage_features": "Lineage gene and peak dynamics",
                   "mouseGastrulation": "Mouse gastrulation",
                   "pretrainedModels": "Pretrained full-data models",

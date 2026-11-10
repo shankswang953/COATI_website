@@ -11,7 +11,6 @@ saved results and figures, with the same navigation and theme as the rest of the
 | [Gastrulation dynamics and mass](tutorials/gastrulation/gastrulationDynamics.ipynb) | Current pretrained 20k unbalanced model, E8.5 UMAP growth and flow, and NMP incoming/outgoing/reweighting decomposition |
 | [Off-lineage leakage](tutorials/gastrulation/offLineageLeakage.ipynb) | Source-resolved incompatible-lineage mass from strict E8.0/E8.5 LOSO predictions using held-out-stage 5-NN annotations |
 | [NMP trajectories and composition](tutorials/gastrulation/nmpTrajectoryComposition.ipynb) | Pretrained balanced and unbalanced RNA/ATAC trajectories, followed by mass-aware Caudal-epiblast fate composition |
-| [Held-out biological reconstruction](tutorials/06_heldout_biological.ipynb) | Optional W2 normalization, a held-out pancreas stage, 1,000 training iterations and shared UMAP reconstruction |
 | [scMultisim](tutorials/scMultisim/index.md) | Train T and balanced COATI |
 | [Lineage gene and peak dynamics](tutorials/09_lineage_features.ipynb) | Later-start NMP cohorts, terminal lineage screening, observed gene/peak decoders, quality checks and molecular curves |
 
@@ -21,7 +20,6 @@ saved results and figures, with the same navigation and theme as the rest of the
 Introduction <tutorials/00_introduction>
 Synthetic data <tutorials/syntheticdata/index>
 Gastrulation <tutorials/gastrulation/index>
-Held-out biological reconstruction <tutorials/06_heldout_biological>
 Lineage gene and peak dynamics <tutorials/09_lineage_features>
 scMultisim <tutorials/scMultisim/index>
 ```

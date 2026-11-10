@@ -16,7 +16,7 @@ retrained after that correction and remain historical workflow demonstrations.
 
 ## Biological temporal holdout
 
-On 2026-10-12, [the pancreas reconstruction tutorial](tutorials/06_heldout_biological.ipynb)
+On 2026-10-12, a pancreas reconstruction run
 was executed on paired RNA PCA50 / ATAC PoissonVI22 inputs. E15.5 (t = 1) was
 excluded from both FiLM-map and vector-field fitting; E14.5 and E16.5 kept their
 original times 0 and 2. The vector-field checkpoint records exactly 1,000
