@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # UMAP flow and growth
 
 Prepare `celltype`, `time` and `barcode` with `ct.prepare_anndata` before
@@ -45,18 +49,14 @@ result.plot_dynamics(cells[cells.obs["time"] == 1.].copy())
 
 `time=.5` evaluates a field at one common time on the displayed coordinates;
 it does not transport those cells to that time. Growth is unavailable for
-balanced models. The image and [biological tutorial](tutorials/07_dynamics.ipynb)
-use a 1,000-iteration multimodal unbalanced gastrulation run on all four observed
-stages. The plot shows all 11,470 E8.5 cells at their shared model time t = 2,
+balanced models. The image and [biological tutorial](tutorials/gastrulation/gastrulationDynamics.ipynb)
+use the current 20,000-step multimodal unbalanced gastrulation model on all four
+observed stages. The plot shows all 11,470 E8.5 cells at their shared model time t = 2,
 with supplied cell-type names in the legend. RNA50 and paired ATAC14 inputs are
 already scaled; the source RNA UMAP is reused. Source data: Argelaguet and
 colleagues, [GSE205117](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE205117),
 with prepared inputs from [TraInfBench](https://github.com/shankswang953/TraInfBench).
-This is a short workflow demonstration, not a convergence or proliferation claim.
-
-Run `examples/run_gastrulation_dynamics.py --data-dir /path/to/gastrulation
---output outputs/gastrulation-dynamics --iterations 1000` to reproduce the example.
-The toy script `examples/run_dynamics.py` remains available for a small input check.
+This is a fitted-model analysis, not a proliferation measurement.
 
 ## Existing velocity interface
 
@@ -149,4 +149,4 @@ result.plot_velocity(embedding=umap_coordinates, points=primary_coordinates,
 `write_velocity` defaults to modifying the supplied AnnData and returns it; copy=True
 leaves the input unchanged. This is the only plotting workflow that writes vectors.
 For CLI plotting, use `coati plot-velocity --help`. For a fully runnable toy example,
-use `examples/run_velocity.py` for the plotting API, the [synthetic data experiments](tutorials/syntheticdata/index.md) for a controlled toy, or [gastrulation dynamics](tutorials/07_dynamics.ipynb) for biological AnnData.
+use `examples/run_velocity.py` for the plotting API, the [synthetic data experiments](tutorials/syntheticdata/index.md) for a controlled toy, or [gastrulation dynamics](tutorials/gastrulation/gastrulationDynamics.ipynb) for biological AnnData.

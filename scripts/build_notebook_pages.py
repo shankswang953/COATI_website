@@ -28,22 +28,21 @@ def main():
         relative = source.relative_to(package / "notebooks")
         if any(part.startswith(".") or part in {"outputs", "_build"} for part in relative.parts):
             continue
-        if source.stem in {"02_paired", "05_velocity"}:
+        if source.stem in {"02_paired", "05_velocity", "11_gaussian_reference"}:
             continue  # Their stable web URLs point to the consolidated comparison.
         notebook = nbformat.read(source, as_version=4)
         # Keep web titles short and retain all code and scientific outputs.
         titles = {"00_introduction": "Introduction", "01_gaussian": "Gaussian toy: sync vs no sync", "02_paired": "Paired modalities",
-                  "03_split": "Splitting and growth", "04_inputs": "Input adapters",
+                  "03_split": "Splitting and growth",
                   "05_velocity": "Vector fields and UMAP velocity",
                   "06_heldout_biological": "Held-out biological reconstruction",
-                  "07_dynamics": "Gastrulation dynamics and mass",
-                  "08_map_quality": "Train and inspect a cross-modal map",
                   "09_lineage_features": "Lineage gene and peak dynamics",
                   "mouseGastrulation": "Mouse gastrulation",
                   "pretrainedModels": "Pretrained full-data models",
+                  "gastrulationDynamics": "Gastrulation dynamics and mass",
                   "heldoutDistribution": "Held-out distribution reconstruction",
+                  "offLineageLeakage": "Off-lineage leakage",
                   "nmpTrajectoryComposition": "NMP trajectories and Caudal-epiblast composition",
-                  "11_gaussian_reference": "Original Gaussian experiment",
                   "balancedGaussianbump": "Balanced Gaussian bump",
                   "unbalancedGaussianbump": "Unbalanced Gaussian bump",
                   "cyComparison": "Cy comparison",
@@ -65,6 +64,10 @@ def main():
                 cell.source = cell.source.replace(
                     "https://shankswang953.github.io/COATI/",
                     "https://shankswang953.github.io/COATI_website/",
+                )
+                cell.source = cell.source.replace(
+                    "(gastrulation/README.md)",
+                    "(gastrulation/index.md)",
                 )
         # MyST-NB renders each notebook within the documentation theme.
         destination = out / relative

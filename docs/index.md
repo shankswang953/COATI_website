@@ -70,9 +70,7 @@ tutorials
 
 configuration
 model
-velocity
 maps
 downstream
 api
-validation
 ```

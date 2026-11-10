@@ -2,10 +2,7 @@
 
 ## Train T without a vector field
 
-The existing `coati.maps.train_map` function can fit T independently. The
-[biological map tutorial](tutorials/08_map_quality.ipynb) shows paired gastrulation
-inputs, map fitting, checkpoint reload, a shared ATAC UMAP and cell-type/stage
-checks on unseen pairs.
+The existing `coati.maps.train_map` function can fit T independently.
 
 ```python
 import coati as ct

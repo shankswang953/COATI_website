@@ -1,3 +1,7 @@
+---
+orphan: true
+---
+
 # Validation
 
 Verified on 2026-09-10 using Python 3.10 on macOS ARM64, CPU, in a fresh isolated environment. No biological training was run.
@@ -101,61 +105,14 @@ algorithm under `src/coati/_core/` was not changed.
 
 ## Gastrulation UMAP dynamics
 
-On 2026-10-12, the [biological dynamics tutorial](tutorials/07_dynamics.ipynb)
-was run on all 35,503 paired gastrulation cells (RNA50 / ATAC14) at times
-0, 1, 2 and 2.5. The multimodal unbalanced checkpoint records exactly 1,000
-vector-field iterations. The fitted FiLM map passed its configured within-stage
-validation checks, with checkpoint selection at epoch 53; these checks reuse
-validation cells for selection and do not establish independent biological accuracy.
+The [biological dynamics tutorial](tutorials/gastrulation/gastrulationDynamics.ipynb)
+loads the current full-data unbalanced COATI checkpoint trained for 20,000 iterations
+with seed 0 and Cy=0.5. It reuses the supplied RNA UMAP and displays all 11,470 E8.5
+cells with the fitted velocity field and instantaneous growth. No UMAP is refitted,
+and no new cell-type inference is performed.
 
-The figure displays all 11,470 E8.5 cells using the existing source RNA UMAP.
-Source annotations are preserved, with 3,015 missing labels explicitly marked
-`unknown` across the training data. Features are reused as supplied without a
-second normalization. No new UMAP or cell-type inference is performed.
-Velocities and instantaneous growth agree exactly after checkpoint reload;
-AnnData storage preserves the tested vectors, growth, coordinates and barcodes.
-The standalone script was verified by reloading the same run, and notebook
-plotting/storage cells were also checked from the notebook directory.
-
-This one-seed short run is a functional biological-data example, not a claim of
-convergence, lineage accuracy or measured proliferation. The resolved configuration,
-source hashes, map diagnostics and growth summaries are in
-`provenance/gastrulation_dynamics_1000.json`. No training algorithm or original
-TraInf file was changed.
-
-## Standalone gastrulation map quality
-
-On 2026-10-12, [the map-only tutorial](tutorials/08_map_quality.ipynb) trained the
-existing FiLM mapper on paired RNA50 / ATAC14 gastrulation features. An outer
-within-stage split reserved 7,101 test pairs before calling `train_map`. The map's
-saved internal splits contain 22,722 optimization and 5,680 validation pairs;
-these three roles are disjoint. The map completed 79 epochs of a 300-epoch budget,
-selected epoch 49, and passed its configured internal validation diagnostics.
-No vector-field training was run for this tutorial.
-
-The source RNA UMAP is a visualization with fixed source preprocessing. The ATAC
-UMAP and both 15-neighbor classifiers were fitted only on real optimization ATAC.
-True and mapped test ATAC use the same frozen UMAP transform. Labels and stage
-agreement were scored in ATAC14, not UMAP. The 6,516 annotated test cells exclude
-unknown labels from cell-type scores; all test pairs remain in stage checks.
-
-| Test input | Celltype agreement | Macro recall | Stage agreement |
-| --- | ---: | ---: | ---: |
-| Real ATAC | 82.27% | 66.17% | 76.59% |
-| T-mapped ATAC | 83.81% | 67.42% | 80.23% |
-
-These one-seed readouts assess preservation under a fixed reference classifier,
-not biological superiority of predictions over observations. FiLM receives time,
-so stage agreement is conditional on supplied time, not independent time inference.
-Mapped cell-type agreement at E7.5 was 67.61%; per-type counts and recalls identify
-weaker groups. Precomputed source PCA/LSI and scales were not refitted, and this is
-not a new-stage or raw-data preprocessing holdout.
-
-Map outputs agreed exactly after reload. The notebook's analysis cells were also
-verified from its own directory, and the standalone script reproduced the saved
-map checks using `--reuse`. Numerical settings, data hashes, subgroup tables and
-validation details are in `provenance/gastrulation_map_quality.json`. Original
-TraInf files and the packaged training algorithm were not changed.
+The same checkpoint is used for the NMP mass decomposition below. This is a fitted-model
+analysis, not a proliferation measurement or an independent biological validation.
 
 ## Lineage molecular readouts
 
@@ -189,15 +146,15 @@ regulation or chromatin priming.
 
 ## Cell-type mass accounting
 
-The updated [gastrulation dynamics tutorial](tutorials/07_dynamics.ipynb) reuses
-its original 1,000-iteration model and tracks all 9,018 E7.5 particles through
-E8.0 to E8.5. With stage-matched one-neighbor RNA50 labels and globally
-normalized endpoint mass, NMP contributions are +6.688522 incoming,
--0.265143 outgoing and -0.297578 retained reweighting percentage points.
-Their sum, +6.125801, equals the predicted proportion difference; the
-cross-sectional observed difference is displayed separately. These values
-illustrate the fitted model's relative-mass accounting, not independent
-biological transition estimates or a claim of convergence.
+The updated [gastrulation dynamics tutorial](tutorials/gastrulation/gastrulationDynamics.ipynb)
+tracks all 9,018 E7.5 particles through E8.0 to E8.5 with the current 20,000-step
+unbalanced checkpoint. With stage-matched one-neighbor RNA50 labels and globally
+normalized endpoint mass, NMP contributions are +4.731281 incoming, -1.012193
+outgoing and +0.447255 retained reweighting percentage points. Their sum,
++4.166343, equals the predicted proportion difference from 3.57% to 7.74%.
+The cross-sectional observed difference is displayed separately. These values
+illustrate the fitted model's relative-mass accounting, not independent biological
+transition estimates.
 
 Tests check the exact identity on retained, entering, leaving and unrelated
 particles, normalization over the full population, stability under large log
@@ -328,20 +285,3 @@ Pairing, model inputs, source-file hashes and finite nonzero velocities were
 verified. The training core and original project are unchanged. This short run
 is a workflow demonstration; it does not establish biological accuracy.
 Settings and validation details are in `provenance/gastrulation_quickstart.json`.
-
-## Original Gaussian reference reproduction
-
-The [original Gaussian experiment](tutorials/11_gaussian_reference.ipynb) loads
-byte-identical copies of the original primary/secondary observations, support
-cloud, frozen Fourier-map checkpoint and reference vector-field artifacts.
-All source hashes were checked; original TraInf files are unchanged. No endpoint
-sampling, normalization, warm-up or analytic-map substitution is used.
-
-The original checkpoint replay has zero maximum primary-coordinate error and
-approximately 1.2e-7 secondary-coordinate error against the saved tensors in this
-environment. A separate direct 3,000-step fit was executed and displayed. It does
-not recover the historical weights exactly; refitting and checkpoint replay are
-explicitly distinguished. All 79 package tests passed, including data identity
-and original-checkpoint replay checks. Full comparisons and measured errors are
-in `provenance/gaussian_reference_comparison.md` and
-`provenance/gaussian_reference_validation.json`.

@@ -154,7 +154,7 @@ chromatin priming or temporal precedence.
 
 ## Cell-type mass decomposition
 
-The [biological dynamics tutorial](tutorials/07_dynamics.ipynb) decomposes a
+The [biological dynamics tutorial](tutorials/gastrulation/gastrulationDynamics.ipynb) decomposes a
 chosen cell type's predicted proportion change over two observed times.
 
 ```python
