@@ -23,6 +23,10 @@ result.plot_trajectory()
 
 For a short biological example, clone COATI and run [examples/gastrulation/train_balanced.py](https://github.com/shankswang953/COATI/blob/main/examples/gastrulation/train_balanced.py). Dataset-specific preparation is maintained in the repository examples, outside the installed package. The API above reads your prepared embeddings. Validation includes synthetic workflows and biological temporal-holdout tutorials; it does not establish biological superiority.
 
+## Paper reproduction models
+
+[Download the paper reproduction models (.zip)](https://github.com/shankswang953/COATI/releases/download/paper-models-v1/reproduce_results.zip) for gastrulation, pancreatic endocrinogenesis, palate development and human cerebral organoids. The archive contains 18 selected COATI checkpoints with their frozen cross-modal maps, normalization parameters and model metadata, organized by balanced/unbalanced and full/LOSO design.
+
 ## Basic workflow
 
 COATI uses time-indexed primary embeddings, such as RNA PCA, and can optionally
